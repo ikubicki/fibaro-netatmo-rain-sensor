@@ -18,8 +18,6 @@ Data updates every 5 minutes by default.
 
 `Device ID` - identifier of Netatmo Weather Station from which values should be taken. This value will be automatically populated on first successful connection to weather station.
 
-`Module ID` - identifier of Netatmo Weather Station module from which values should be taken. This value will be automatically populated on first successful connection to weather station.
-
 `Refresh Interval` - number of minutes defining how often data should be refreshed. This value will be automatically populated on initialization of quick application.
 
 `Data Type` - gives ability to choose value to store between `now`, `hour` and `day`. Defaults to `now`.
