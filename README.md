@@ -1,0 +1,1 @@
+# fibaro-netatmo-rain-sensor
