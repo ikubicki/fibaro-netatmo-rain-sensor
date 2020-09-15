@@ -57,24 +57,35 @@ function QuickApp:pullNetatmoData()
             end
         end
 
-        self:updateProperty("value", module.dashboard_data.Rain)
-        self:updateProperty("unit", "mm")
+        if module ~= nil then
+            if self.config:getDataType() == "1" or self.config:getDataType() == "hour" then
+                self:updateProperty("value", module.dashboard_data.sum_rain_1)
+            elseif self.config:getDataType() == "24" or self.config:getDataType() == "today" then
+                self:updateProperty("value", module.dashboard_data.sum_rain_24)
+            else 
+                self:updateProperty("value", module.dashboard_data.Rain)
+            end
 
-        self.data = {
-            ["0"] = module.dashboard_data.Rain,
-            ["1"] = module.dashboard_data.sum_rain_1,
-            ["24"] = module.dashboard_data.sum_rain_24
-        }
+            self:updateProperty("unit", "mm")
 
-        self:trace('Module ' .. module["_id"] .. ' updated')
-        self:updateView("label1", "text", string.format(self.i18n:get('last-update'), os.date('%Y-%m-%d %H:%M:%S')))
-        self:updateView("button1", "text", self.i18n:get('refresh'))
-        
-        if string.len(self.config:getDeviceID()) < 4 then
-            self.config:setDeviceID(device["_id"])
-        end
-        if string.len(self.config:getModuleID()) < 4 then
-            self.config:setModuleID(module["_id"])
+            self.data = {
+                ["0"] = module.dashboard_data.Rain,
+                ["1"] = module.dashboard_data.sum_rain_1,
+                ["24"] = module.dashboard_data.sum_rain_24
+            }
+
+            self:trace('Module ' .. module["_id"] .. ' updated')
+            self:updateView("label1", "text", string.format(self.i18n:get('last-update'), os.date('%Y-%m-%d %H:%M:%S')))
+            self:updateView("button1", "text", self.i18n:get('refresh'))
+            
+            if string.len(self.config:getDeviceID()) < 4 then
+                self.config:setDeviceID(device["_id"])
+            end
+            if string.len(self.config:getModuleID()) < 4 then
+                self.config:setModuleID(module["_id"])
+            end
+        else
+            self:error('Unable to retrieve module data')
         end
     end
     

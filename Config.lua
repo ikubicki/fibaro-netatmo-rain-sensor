@@ -54,6 +54,18 @@ function Config:getTimeoutInterval()
     return tonumber(self.interval) * 60000
 end
 
+function Config:getDataType()
+    return self.dataType
+end
+
+function Config:setDataType(dataType)
+    if string.len(self.dataType) > 3 then
+        return false
+    end
+    self.app:setVariable("Data Type", dataType)
+    self.dataType = dataType
+end
+
 --[[
 This function takes variables and sets as global variables if those are not set already.
 This way, adding other devices might be optional and leaves option for users, 
@@ -67,6 +79,7 @@ function Config:init()
     self.deviceID = tostring(self.app:getVariable('Device ID'))
     self.moduleID = tostring(self.app:getVariable('Module ID'))
     self.interval = self.app:getVariable('Refresh Interval')
+    self.dataType = self.app:getVariable('Data Type')
 
     local storedClientID = Globals:get('netatmo_client_id')
     local storedClientSecret = Globals:get('netatmo_client_secret')
