@@ -22,6 +22,8 @@ Data updates every 5 minutes by default.
 
 `Refresh Interval` - number of minutes defining how often data should be refreshed. This value will be automatically populated on initialization of quick application.
 
+`Data Type` - gives ability to choose value to store between `now`, `hour` and `day`. Defaults to `now`.
+
 ## Integration
 
 This quick application integrates with other Netatmo dedicated quick apps for devices. It will automatically populate configuration to new virtual Netatmo devices.
